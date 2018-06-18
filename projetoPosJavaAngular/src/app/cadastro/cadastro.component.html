@@ -1,0 +1,81 @@
+<div class="container">
+  <div>{{titulo}}</div>
+
+  <app-card titulo="Preencha todos os Campos">
+
+    <form [formGroup]="meuForm" action="" method="post" (ngSubmit)="salvarDados()">
+
+      <fieldset>
+        <app-formulario titulo="Nome :" forLabel="txtNome">
+          <input type="text" name="txtNome" id="txtNome" class="form-control  col-md-10" required formControlName="nome" [(ngModel)]="dados.nome">
+          <div *ngIf="meuForm.get('nome').invalid
+          && (meuForm.get('nome').dirty
+          || meuForm.get('nome').touched)">
+            <div *ngIf="meuForm.get('nome').errors.required" class="alert alert-secondary col col-md-10" role="aler">
+              O Campo nome é de preenchimento obrigadorio
+            </div>
+            <div *ngIf="meuForm.get('nome').errors.minlength">
+              Informe, no mínino dois caracteres
+            </div>
+
+          </div>
+
+
+        </app-formulario>
+
+        <app-formulario titulo="CPF:" forLabel="txtCPF">
+          <input type="text" name="txtCPF" id="txtCPF" class="form-control col-md-10" required formControlName="cpf" [(ngModel)]="dados.cpf">
+
+        </app-formulario>
+
+        <app-formulario titulo="E-mail" forLabel="email">
+          <input type="email" name="email" id="email" class="form-control col-md-10" required formControlName="email" [(ngModel)]="dados.email">
+          <div *ngIf="meuForm.get('email').invalid
+          && (meuForm.get('email').dirty
+          || meuForm.get('email').touched)">
+            <div *ngIf="meuForm.get('email').errors.required" class="alert alert-secondary col col-md-10" role="aler">
+              O Campo e-mail é de preenchimento obrigadorio
+            </div>
+            <div *ngIf="meuForm.get('email').errors.email" class="alert alert-secondary col col-md-10" role="aler">
+              O Campo e-mail é de preenchimento obrigadorio @
+            </div>
+
+          </div>
+
+        </app-formulario>
+
+        <div class="row form-group">
+
+          <label for="rMasc" class="col-md-2">
+            Genero:
+          </label>
+          <div class="form-check-inline">
+            <input type="radio" name="genero" id="rMasc" value="M" class="form-check-input" required formControlName="genero" [(ngModel)]="dados.genero">
+            <label for="" class="form-check-label"> Masculino </label>
+          </div>
+          <div class="form-check-inline">
+            <input type="radio" name="genero" id="rFem" value="F" class="form-check-input" required formControlName="genero" [(ngModel)]="dados.genero">
+
+            <label for="" class="form-check-label">Femenino </label>
+          </div>
+
+
+
+          <div class="centralizar">
+            <input type="submit" value="enviar" class="btn btn-primary"
+            [disabled]="!meuForm.valid"
+
+            >
+
+
+          </div>
+
+        </div>
+      </fieldset>
+
+    </form>
+
+
+  </app-card>
+
+</div>
