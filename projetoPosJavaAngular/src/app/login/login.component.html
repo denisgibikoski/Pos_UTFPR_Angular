@@ -8,9 +8,38 @@
       </div>
       <div class="modal-body">
 
-        <form>
-          <input type="text" name="user" placeholder="Username">
-          <input type="password" name="pass" placeholder="Password">
+        <form [formGroup]="loginForm">
+          <app-formulario titulo="" forLabel="email">
+            <input type="email" name="email" id="email" class="form-control col-md-10" placeholder="E-mail" required formControlName="email" [(ngModel)]="login.email">
+            <div *ngIf="loginForm.get('email').invalid
+            && (loginForm.get('email').dirty
+            ||loginForm.get('email').touched)">
+              <div *ngIf="loginForm.get('email').errors.required" class="alert alert-secondary col col-md-10" role="aler">
+                O Campo e-mail é de preenchimento obrigadorio
+              </div>
+              <div *ngIf="loginForm.get('email').errors.email" class="alert alert-secondary col col-md-10" role="aler">
+                O Campo e-mail é de preenchimento com um e-mail valido exemplo@exemplo.com
+              </div>
+
+            </div>
+
+          </app-formulario>
+          <app-formulario titulo="" forLabel="password">
+            <input type="password" name="password" id="password" class="form-control col-md-10" placeholder="password" required formControlName="password" [(ngModel)]="login.password">
+            <div *ngIf="loginForm.get('password').invalid
+            && (loginForm.get('password').dirty
+            ||loginForm.get('password').touched)">
+              <div *ngIf="loginForm.get('password').errors.required" class="alert alert-primary col col-md-10" role="aler">
+                O Campo Password é de preenchimento obrigadorio
+              </div>
+                <div *ngIf="loginForm.get('password').errors.pattern" class="alert alert-warning col col-md-10" role="aler">
+                Teve conter Caracteres Especial ?@!
+              </div>
+
+
+            </div>
+
+          </app-formulario>
 
         </form>
 
